@@ -1,0 +1,25 @@
+file_path = pwd;
+file_path = strcat(file_path,'\coke_bottle_images');
+disp(file_path);
+%file_name = 'toMatchTestTrain.m';
+%filecontent = load(fullfile(file_path, file_name{2}));
+%toMatchTestTrain('image001.jpg','image001.jpg',5)
+%fileID = fopen('sameScore.txt','w');
+%fprintf(fileID,'%s','anything');
+test_files = dir('test_images');
+train_files = dir('ML');
+fileID1 = fopen('sameScore.txt','w');
+fileID2 = fopen('differentScore.txt','w');
+for i=3:length(test_files)
+    for j=3:length(train_files)
+        if i==3
+            testFileName=test_files(i).name;
+            trainFileName=train_files(j).name;
+            testFileNamePath=strcat('test_images\',testFileName);
+            trainFileNamePath=strcat('ML\',trainFileName);
+            fprintf(fileID1,'%s %s %d\n',testFileName,trainFileName,toMatchTestTrain(testFileNamePath,trainFileNamePath,1));
+            for k=1:10
+                fprintf(fileID1,'%s %s %d\n',testFileName,trainFileName,toMatchTestTrain(testFileNamePath,trainFileNamePath,1));
+        end
+    end
+end
